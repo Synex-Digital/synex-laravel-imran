@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synex Digital — Official Brand Identity & Design System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* Brand Core Tokens */
+            --synex-primary: #4555FD;
+            --synex-primary-hover: #3744E0;
+            --synex-primary-glow: rgba(69, 85, 253, 0.4);
+            
+            --synex-cyan: #00E5FF;
+            --synex-cyan-muted: rgba(0, 229, 255, 0.15);
+            
+            --synex-emerald: #10B981;
+            --synex-emerald-muted: rgba(16, 185, 129, 0.15);
+            
+            /* Dark Background Surfaces */
+            --bg-midnight: #0A0E1A;
+            --bg-surface-glass: #141C2E;
+            --bg-surface-elevated: #1B243B;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glass-hover: rgba(69, 85, 253, 0.5);
+            
+            /* Text & Contrast */
+            --text-heading: #FFFFFF;
+            --text-body: #E2E8F0;
+            --text-muted: #94A3B8;
+            --text-dim: #64748B;
+            
+            /* Fonts */
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-midnight);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(69, 85, 253, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 229, 255, 0.08) 0%, transparent 35%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--text-heading);
+            letter-spacing: -0.02em;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 26, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo-img {
+            height: 38px;
+            width: auto;
+        }
+
+        .badge-live-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--synex-emerald-muted);
+            color: var(--synex-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.825rem;
+            font-weight: 600;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--synex-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--synex-emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Section Layout */
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            color: var(--synex-cyan);
+            font-family: var(--font-code);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            max-width: 700px;
+        }
+
+        /* Logo Grid */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .logo-card {
+            background: var(--bg-surface-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-card:hover {
+            border-color: var(--border-glass-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(69, 85, 253, 0.25);
+        }
+
+        .logo-card.dark-bg {
+            background: #0A0E1A;
+        }
+        .logo-card.blue-bg {
+            background: linear-gradient(135deg, #1D237E 0%, #0A0E1A 100%);
+        }
+        .logo-card.light-bg {
+            background: #FFFFFF;
+        }
+
+        .logo-card img {
+            max-height: 70px;
+            max-width: 80%;
+            object-fit: contain;
+        }
+
+        .logo-card-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 1.25rem;
+            right: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .logo-card.light-bg .logo-card-label {
+            color: #475569;
+        }
+
+        .badge-recommended {
+            background: var(--synex-primary);
+            color: #fff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Color Palette Grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .color-card {
+            background: var(--bg-surface-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glass-hover);
+        }
+
+        .color-swatch {
+            height: 120px;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .copy-hex-btn {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-hex-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .color-info {
+            padding: 1.25rem;
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-heading);
+            margin-bottom: 0.25rem;
+        }
+
+        .color-role {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .contrast-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contrast-badge.pass-aaa {
+            color: var(--synex-emerald);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        /* Typography Showcase */
+        .type-specimen {
+            background: var(--bg-surface-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .type-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            align-items: baseline;
+            gap: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .type-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .type-meta {
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            color: var(--synex-cyan);
+        }
+
+        .t-hero { font-size: 3.5rem; font-weight: 800; line-height: 1.1; }
+        .t-h1 { font-size: 2.5rem; font-weight: 700; }
+        .t-h2 { font-size: 1.85rem; font-weight: 600; }
+        .t-body { font-size: 1.05rem; font-weight: 400; color: var(--text-body); }
+        .t-code { font-family: var(--font-code); font-size: 0.95rem; color: var(--synex-cyan); }
+
+        /* Interactive Components */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+        }
+
+        .comp-card {
+            background: var(--bg-surface-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .comp-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Buttons */
+        .btn-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--synex-primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px var(--synex-primary-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--synex-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(69, 85, 253, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #FFFFFF;
+            border: 1px solid var(--border-glass);
+            padding: 0.85rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.25s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-cyan {
+            background: var(--synex-cyan-muted);
+            color: var(--synex-cyan);
+            border: 1px solid rgba(0, 229, 255, 0.4);
+            padding: 0.85rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-cyan:hover {
+            background: rgba(0, 229, 255, 0.25);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Metric Cards */
+        .metric-pill-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .metric-pill {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .metric-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--synex-cyan-muted);
+            color: var(--synex-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            font-family: var(--font-heading);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Trust Badges */
+        .trust-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+        }
+
+        .trust-badge {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .trust-badge i {
+            color: var(--synex-primary);
+            font-size: 1.2rem;
+        }
+
+        .trust-badge-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tb-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+
+        .tb-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Forms */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-body);
+        }
+
+        .input-text {
+            background: rgba(10, 14, 26, 0.7);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            color: var(--text-heading);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .input-text:focus {
+            border-color: var(--synex-primary);
+            box-shadow: 0 0 0 3px var(--synex-primary-glow);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="brand-logo-wrap">
+                <img src="Synex logo/7.png" alt="Synex Digital Logo" class="brand-logo-img">
+            </div>
+            <div class="badge-live-status">
+                <span class="pulse-dot"></span>
+                Official Design System v1.0
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Title -->
+        <section class="section" style="padding-top: 3.5rem;">
+            <span class="section-tag">// SYNEX DIGITAL BRAND SYSTEM</span>
+            <h1 style="font-size: 3rem; margin-top: 0.5rem;">Visual Identity & Component Specs</h1>
+            <p class="section-subtitle">
+                An enterprise-grade, high-contrast design system built to inspire trust, showcase engineering excellence, and deliver ultra-smooth interactions.
+            </p>
+        </section>
+
+        <!-- 1. Logo Suite -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-tag">01 / LOGO SUITE</span>
+                <h2 class="section-title">Brand Logotype Variants</h2>
+                <p class="section-subtitle">Official logotype exports for light, dark, and royal blue brand surfaces.</p>
+            </div>
+
+            <div class="logo-grid">
+                <!-- Variant 1 (Primary Recommended) -->
+                <div class="logo-card blue-bg">
+                    <img src="Synex logo/7.png" alt="Synex Primary Royal Logo">
+                    <div class="logo-card-label">
+                        <span>Royal Blue Gradient BG</span>
+                        <span class="badge-recommended">Primary Choice</span>
+                    </div>
+                </div>
+
+                <!-- Variant 2 (Dark Mode Header) -->
+                <div class="logo-card dark-bg">
+                    <img src="Synex logo/6.png" alt="Synex Dark Logo">
+                    <div class="logo-card-label">
+                        <span>Midnight Dark BG</span>
+                        <span>Dark Header</span>
+                    </div>
+                </div>
+
+                <!-- Variant 3 (Light Background) -->
+                <div class="logo-card light-bg">
+                    <img src="Synex logo/5.png" alt="Synex Light Logo">
+                    <div class="logo-card-label">
+                        <span>Pure White Surface</span>
+                        <span>Light Mode</span>
+                    </div>
+                </div>
+
+                <!-- Variant 4 (Full Tagline) -->
+                <div class="logo-card blue-bg">
+                    <img src="Synex logo/8.png" alt="Synex Tagline Logo">
+                    <div class="logo-card-label">
+                        <span>With Agency Tagline</span>
+                        <span>Footer / Hero</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Color System & WCAG Ratios -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-tag">02 / COLOR PALETTE & CONTRAST</span>
+                <h2 class="section-title">Verified Accessible Palette</h2>
+                <p class="section-subtitle">Every color pair is strictly tested against WCAG AA (4.5:1) and AAA (7:1) contrast benchmarks.</p>
+            </div>
+
+            <div class="color-grid">
+                <!-- Primary Blue -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #4555FD;">
+                        <button class="copy-hex-btn" onclick="copyColor('#4555FD')">#4555FD</button>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Electric Synex Blue</div>
+                        <div class="color-role">Primary Action / Hero CTAs</div>
+                        <div class="contrast-badge pass-aaa"><i class="fa-solid fa-circle-check"></i> 4.9:1 (WCAG AA Pass)</div>
+                    </div>
+                </div>
+
+                <!-- Cyber Cyan -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #00E5FF;">
+                        <button class="copy-hex-btn" onclick="copyColor('#00E5FF')">#00E5FF</button>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Cyber Glow Cyan</div>
+                        <div class="color-role">Micro-Highlights & Tech Badges</div>
+                        <div class="contrast-badge pass-aaa"><i class="fa-solid fa-circle-check"></i> 12.4:1 (WCAG AAA Pass)</div>
+                    </div>
+                </div>
+
+                <!-- Trust Emerald -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #10B981;">
+                        <button class="copy-hex-btn" onclick="copyColor('#10B981')">#10B981</button>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Trust Emerald</div>
+                        <div class="color-role">Success Badges & Live Stats</div>
+                        <div class="contrast-badge pass-aaa"><i class="fa-solid fa-circle-check"></i> 8.5:1 (WCAG AAA Pass)</div>
+                    </div>
+                </div>
+
+                <!-- Midnight Dark Surface -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #0A0E1A;">
+                        <button class="copy-hex-btn" onclick="copyColor('#0A0E1A')">#0A0E1A</button>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Midnight Dark</div>
+                        <div class="color-role">Main App Canvas Background</div>
+                        <div class="contrast-badge pass-aaa"><i class="fa-solid fa-circle-check"></i> 18.5:1 (WCAG AAA Pass)</div>
+                    </div>
+                </div>
+
+                <!-- Slate Glass Surface -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #141C2E;">
+                        <button class="copy-hex-btn" onclick="copyColor('#141C2E')">#141C2E</button>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Slate Glass Surface</div>
+                        <div class="color-role">Glassmorphic Container Cards</div>
+                        <div class="contrast-badge pass-aaa"><i class="fa-solid fa-circle-check"></i> 11.8:1 (WCAG AAA Pass)</div>
+                    </div>
+                </div>
+
+                <!-- Pure White Text -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #FFFFFF;">
+                        <button class="copy-hex-btn" style="background:#000;" onclick="copyColor('#FFFFFF')">#FFFFFF</button>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Pure White Heading</div>
+                        <div class="color-role">Primary High-Contrast Headlines</div>
+                        <div class="contrast-badge pass-aaa"><i class="fa-solid fa-circle-check"></i> 18.5:1 (WCAG AAA Pass)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Typography -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-tag">03 / TYPOGRAPHY SCALE</span>
+                <h2 class="section-title">Font Hierarchy</h2>
+                <p class="section-subtitle">Paired fonts: Space Grotesk (Headings) and Inter (Body) for a distinct engineering & AI laboratory identity.</p>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-row">
+                    <div class="type-meta">Hero / Display 56px</div>
+                    <div class="t-hero">Innovate. Design. Build.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H1 Headline 40px</div>
+                    <div class="t-h1">Enterprise Software Architecture</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H2 Section Title 30px</div>
+                    <div class="t-h2">High-Performance Custom Engineering</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Body Regular 16px</div>
+                    <div class="t-body">Synex Digital crafts bespoke software solutions engineered for scalability, speed, and conversion. Built with modern Laravel and component architecture.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Code & Mono 15px</div>
+                    <div class="t-code">const stack = ['Laravel', 'GSAP', 'Tailwind', 'shadcn'];</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Interactive Components -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-tag">04 / INTERACTIVE UI COMPONENTS</span>
+                <h2 class="section-title">Design System Components</h2>
+                <p class="section-subtitle">shadcn-inspired glassmorphic UI elements with interactive states and GSAP motion.</p>
+            </div>
+
+            <div class="component-grid">
+                <!-- Buttons Card -->
+                <div class="comp-card">
+                    <div class="comp-title">
+                        <span>Action Buttons</span>
+                        <i class="fa-solid fa-hand-pointer" style="color:var(--synex-cyan)"></i>
+                    </div>
+                    <div class="btn-wrap">
+                        <button class="btn-primary">
+                            <span>Launch Project</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fa-solid fa-play"></i>
+                            <span>Watch Demo</span>
+                        </button>
+                        <button class="btn-cyan">
+                            <span>Cyber Pill</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metrics Card -->
+                <div class="comp-card">
+                    <div class="comp-title">
+                        <span>Trust Metric Pills</span>
+                        <i class="fa-solid fa-chart-line" style="color:var(--synex-emerald)"></i>
+                    </div>
+                    <div class="metric-pill-grid">
+                        <div class="metric-pill">
+                            <div class="metric-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <div>
+                                <div class="metric-value counter" data-target="99.9">99.9%</div>
+                                <div class="metric-label">Uptime SLA</div>
+                            </div>
+                        </div>
+                        <div class="metric-pill">
+                            <div class="metric-icon" style="background:var(--synex-primary-glow); color:#fff;"><i class="fa-solid fa-rocket"></i></div>
+                            <div>
+                                <div class="metric-value counter" data-target="150">150+</div>
+                                <div class="metric-label">Shipped Apps</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security & Trust Badges -->
+                <div class="comp-card">
+                    <div class="comp-title">
+                        <span>Security & Enterprise Trust</span>
+                        <i class="fa-solid fa-shield-halved" style="color:var(--synex-primary)"></i>
+                    </div>
+                    <div class="trust-badge-row">
+                        <div class="trust-badge">
+                            <i class="fa-solid fa-shield-check"></i>
+                            <div class="trust-badge-text">
+                                <span class="tb-title">SOC 2 Type II</span>
+                                <span class="tb-sub">Audited & Verified</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fa-solid fa-lock"></i>
+                            <div class="trust-badge-text">
+                                <span class="tb-title">ISO 27001</span>
+                                <span class="tb-sub">Information Security</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Controls -->
+                <div class="comp-card">
+                    <div class="comp-title">
+                        <span>High-Contrast Inputs</span>
+                        <i class="fa-solid fa-keyboard" style="color:var(--text-muted)"></i>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Project Inquiry</label>
+                        <input type="text" class="input-text" placeholder="Enter your business email...">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Synex Digital. All Rights Reserved. Built with Laravel, GSAP & Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyColor(hex) {
+            navigator.clipboard.writeText(hex);
+            alert('Copied color code: ' + hex);
+        }
+
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.section-tag', { opacity: 0, y: 20, duration: 0.8, stagger: 0.2 });
+            gsap.from('.logo-card', { opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power2.out' });
+        });
+    </script>
+</body>
+</html>

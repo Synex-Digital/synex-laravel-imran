@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer/switzer-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer/switzer-500.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer/switzer-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer/switzer-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@theme {
+  --font-sans: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --color-synex-primary: #4555FD;
+  --color-synex-primary-hover: #3744E0;
+  --color-synex-bg: #0A0E1A;
+  --color-synex-surface-1: #141C2E;
+  --color-synex-surface-2: #1B243B;
+  --color-synex-cyan: #00E5FF;
+  --color-synex-emerald: #10B981;
+}
+
+/* Accessibility & Interaction Defaults */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility ring defaults for keyboard users */
+:focus-visible {
+  outline: 2px solid #4555FD;
+  outline-offset: 2px;
+}
